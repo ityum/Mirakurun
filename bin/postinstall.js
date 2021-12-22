@@ -14,8 +14,14 @@
    limitations under the License.
 */
 "use strict";
-
-if (process.env["npm_config_global"] !== undefined || process.env["npm_config_global"] !== "true") {
+if (process.env["GITHUB_ACTIONS"] === "true"){
+    console.log(process.env);
+    process.exit(0);
+}
+if (process.env["npm_config_global"] === "true") {
+    ;
+} else {
+    console.log("npm_config_global is not true. \nTerminate the process.");
     process.exit(0);
 }
 
