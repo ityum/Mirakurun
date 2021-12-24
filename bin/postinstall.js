@@ -21,7 +21,7 @@ if (process.env["GITHUB_ACTIONS"] === "true"){
 if (process.env["npm_config_global"] === "true") {
     ;
 } else {
-    console.log("npm_config_global is not true. \nTerminate the process.");
+    console.log("npm_config_global is not true. Terminate the process.");
     process.exit(0);
 }
 
@@ -127,7 +127,8 @@ if (process.platform === "linux" || process.platform === "darwin") {
             "--set", `AppStderr ${ stderrLogPath }`,
             "--env", `USERPROFILE=${ process.env.USERPROFILE }`,
             "--env", `LOCALAPPDATA=${ process.env.LOCALAPPDATA }`,
-            "--env", "USING_WINSER=1"
+            "--env", "USING_WINSER=1",
+            "--name", "mirakurun"
         ],
         {
             stdio: [
