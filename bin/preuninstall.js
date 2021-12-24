@@ -15,7 +15,9 @@
 */
 "use strict";
 
-if (process.env["npm_config_global"] !== undefined && process.env["npm_config_global"] !== "true") {
+if (process.env["npm_config_global"] === "true") {
+    ;
+} else {
     process.exit(0);
 }
 
@@ -42,7 +44,7 @@ if (process.platform === "linux" || process.platform === "darwin") {
         ]
     });
 } else if (process.platform === "win32") {
-    execSync("winser -r -x -s", {
+    execSync("winser -r -x -n mirakurun", {
         stdio: [
             null,
             process.stdout,
