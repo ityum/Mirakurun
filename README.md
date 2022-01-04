@@ -2,13 +2,11 @@
 
 # Mirakurun
 
-DVR Tuner Server Service for **[Chinachu](https://chinachu.moe/)** Air.
+DVR Tuner Server for Japanese TV which designed for the "Air" (in development codename).
 
 [![npm version][npm-img]][npm-url]
 [![npm downloads][downloads-image]][downloads-url]
 [![Linux Build][azure-pipelines-img]][azure-pipelines-url]
-[![Dependency Status][dep-img]][dep-url]
-[![devDependency Status][devdep-img]][devdep-url]
 [![tip for next commit](https://tip4commit.com/projects/43158.svg)](https://tip4commit.com/github/Chinachu/Mirakurun)
 [![Backers on Open Collective](https://opencollective.com/Mirakurun/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/Mirakurun/sponsors/badge.svg)](#sponsors)
@@ -88,6 +86,7 @@ You can use PM2 Plus to realtime monitoring if running by PM2.
 * [Rivarun](https://github.com/Chinachu/Rivarun)
 * [BonDriver_Mirakurun](https://github.com/Chinachu/BonDriver_Mirakurun)
 * Mirakurun Client ([Built-in](https://github.com/Chinachu/Mirakurun/blob/master/src/client.ts))
+  * "Air" (in development codename)
   * [Chinachu γ](https://github.com/Chinachu/Chinachu/wiki/Gamma-Installation-V2)
   * [EPGStation](https://github.com/l3tnun/EPGStation)
 
@@ -146,8 +145,4 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 [downloads-url]: https://npmjs.org/package/mirakurun
 [azure-pipelines-img]: https://dev.azure.com/chinachu/Mirakurun/_apis/build/status/Chinachu.Mirakurun?branchName=master
 [azure-pipelines-url]: hhttps://dev.azure.com/chinachu/Mirakurun/_build/latest?definitionId=1&branchName=master
-[dep-img]: https://david-dm.org/Chinachu/Mirakurun.svg
-[dep-url]: https://david-dm.org/Chinachu/Mirakurun
-[devdep-img]: https://david-dm.org/Chinachu/Mirakurun/dev-status.svg
-[devdep-url]: https://david-dm.org/Chinachu/Mirakurun#info=devDependencies
 [docker-url]: https://hub.docker.com/r/chinachu/mirakurun
