@@ -1,29 +1,59 @@
-- name: PT3-S1
+- name: PX4-S1
   types:
     - BS
     - CS
-  command: BonRecTest.exe --driver BonDriver_PT3-S.dll --output - --channel <channel>
-  decoder: ~
+  command: BonRecTest.exe --driver BonDriver_PX4-S.dll --output - --space <space> --channel <channel>
+  decoder: arib-b25-stream-test.exe
   isDisabled: true
 
-- name: PT3-S2
+- name: PX4-S2
   types:
     - BS
     - CS
-  command: BonRecTest.exe --driver BonDriver_PT3-S.dll --output - --channel <channel>
-  decoder: ~
+  command: BonRecTest.exe --driver BonDriver_PX4-S.dll --output - --space <space> --channel <channel>
+  decoder: arib-b25-stream-test.exe
   isDisabled: true
 
-- name: PT3-T1
+- name: PX4-S3
   types:
-    - GR
-  command: BonRecTest.exe --driver BonDriver_PT3-T.dll --output - --channel <channel>
-  decoder: ~
+    - BS
+    - CS
+  command: BonRecTest.exe --driver BonDriver_PX4-S.dll --output - --space <space> --channel <channel>
+  decoder: arib-b25-stream-test.exe
   isDisabled: true
 
-- name: PT3-T2
+- name: PX4-S4
+  types:
+    - BS
+    - CS
+  command: BonRecTest.exe --driver BonDriver_PX4-S.dll --output - --space <space> --channel <channel>
+  decoder: arib-b25-stream-test.exe
+  isDisabled: true
+
+- name: PX4-T1
   types:
     - GR
-  command: BonRecTest.exe --driver BonDriver_PT3-T.dll --output - --channel <channel>
-  decoder: ~
+  command: BonRecTest.exe --driver BonDriver_PX4-T.dll --output - --space <space> --channel <channel>
+  decoder: arib-b25-stream-test.exe
+  isDisabled: true
+
+- name: PX4-T2
+  types:
+    - GR
+  command: BonRecTest.exe --driver BonDriver_PX4-T.dll --output - --space <space> --channel <channel>
+  decoder: arib-b25-stream-test.exe
+  isDisabled: true
+
+- name: PX4-T3
+  types:
+    - GR
+  command: BonRecTest.exe --driver BonDriver_PX4-T.dll --output - --space <space> --channel <channel>
+  decoder: arib-b25-stream-test.exe
+  isDisabled: true
+
+- name: PX4-T4
+  types:
+    - GR
+  command: BonRecTest.exe --driver BonDriver_PX4-T.dll --output - --space <space> --channel <channel>
+  decoder: arib-b25-stream-test.exe
   isDisabled: true
