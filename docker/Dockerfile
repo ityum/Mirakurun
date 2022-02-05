@@ -1,16 +1,16 @@
 ARG ARCH=
-FROM ${ARCH}node:16.13.1-buster AS build
+FROM ${ARCH}node:16.13.2-buster AS build
 WORKDIR /app
-ENV DOCKER=YES
+ENV DOCKER=YES NODE_ENV=production
 ADD . .
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends build-essential && \
-    npm install && \
+    npm install --production=false && \
     npm run build && \
     npm install -g --unsafe-perm --production
 
-FROM ${ARCH}node:16.13.1-buster-slim
+FROM ${ARCH}node:16.13.2-buster-slim
 WORKDIR /app
 RUN apt-get update && \
     apt-get upgrade -y && \
