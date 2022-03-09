@@ -62,6 +62,8 @@ export function getIPv6AddressesForListen(): string[] {
 
 export function isPermittedIPAddress(addr: string): boolean {
 
+    addr = addr.replace("[", "").replace("]", "");
+    addr = addr.split("%")[0];
     const [isIPv4] = Validator.isValidIPv4String(addr);
     if (isIPv4) {
         const ipv4 = new IPv4CidrRange(new IPv4(addr), new IPv4Prefix(32));

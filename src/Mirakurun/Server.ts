@@ -195,9 +195,9 @@ class Server {
                     fs.chmodSync(address, "777");
                 }
             } else {
-                server.listen(serverConfig.port, address, () => {
+                const [addr, iface] = address.split("%");
+                server.listen(serverConfig.port, addr, () => {
                     if (address.includes(":") === true) {
-                        const [addr, iface] = address.split("%");
                         log.info("listening on http://[%s]:%d (%s)", addr, serverConfig.port, iface);
                     } else {
                         log.info("listening on http://%s:%d", address, serverConfig.port);
