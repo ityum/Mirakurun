@@ -89,19 +89,18 @@ const ISO_639_LANG_CODE = {
     etc: Buffer.from("657463", "hex")
 };
 
-interface VersionDict<T = number> {
-    [tableId: number]: T;
-}
+type TableId = number;
+type VersionRecord<T = number> = Record<TableId, T>;
 
 interface EventState {
-    version: VersionDict;
+    version: VersionRecord;
     programId: number;
 
     short: {
-        version: VersionDict; // basic
+        version: VersionRecord; // basic
     };
     extended: {
-        version: VersionDict; // extended
+        version: VersionRecord; // extended
         _descs?: {
             item_description_length: number;
             item_description_char: Buffer;
@@ -111,22 +110,24 @@ interface EventState {
         _done?: boolean;
     };
     component: {
-        version: VersionDict; // basic
+        version: VersionRecord; // basic
     };
     content: {
-        version: VersionDict; // basic
+        version: VersionRecord; // basic
     };
     audio: {
-        version: VersionDict<VersionDict>; // basic
+        version: VersionRecord<VersionRecord>; // basic
         _audios: { [componentTag: number]: db.ProgramAudio };
     };
     series: {
-        version: VersionDict; // basic
+        version: VersionRecord; // basic
     };
     group: {
-        version: VersionDict<VersionDict>; // basic
+        version: VersionRecord<VersionRecord>; // basic
         _groups: db.ProgramRelatedItem[][];
     };
+
+    present?: true;
 }
 
 // forked from rndomhack/node-aribts/blob/1e7ef94bba3d6ac26aec764bf24dde2c2852bfcb/lib/epg.js
@@ -139,6 +140,14 @@ export default class EPG {
         if (!this._epg) {
             return;
         }
+
+        const isPF = (eit.table_id === 0x4E || eit.table_id === 0x4F);
+
+        if (isPF && eit.section_number > 1) {
+            return;
+        }
+
+        const isP = isPF && eit.section_number === 0;
 
         const networkId = eit.original_network_id;
 
@@ -169,7 +178,7 @@ export default class EPG {
                         startAt: getTimeFromMJD(e.start_time),
                         duration: UNKNOWN_DURATION.compare(e.duration) === 0 ? 1 : getTimeFromBCD24(e.duration),
                         isFree: e.free_CA_mode === 0,
-                        _pf: eit.table_id === 0x4E || eit.table_id === 0x4F || undefined
+                        _pf: isPF || undefined
                     };
                     _.program.add(programItem);
                 }
@@ -200,14 +209,20 @@ export default class EPG {
                     group: {
                         version: {},
                         _groups: []
-                    }
+                    },
+
+                    present: isP || undefined
                 };
 
                 service[e.event_id] = state;
             } else {
                 state = service[e.event_id];
 
-                if (isOutOfDate(eit, state.version)) {
+                if (!state.present && isP) {
+                    state.present = true;
+                }
+
+                if ((!state.present || (state.present && isP)) && isOutOfDate(eit, state.version)) {
                     state.version[eit.table_id] = eit.version_number;
 
                     if (UNKNOWN_START_TIME.compare(e.start_time) !== 0) {
@@ -215,7 +230,7 @@ export default class EPG {
                             startAt: getTimeFromMJD(e.start_time),
                             duration: UNKNOWN_DURATION.compare(e.duration) === 0 ? 1 : getTimeFromBCD24(e.duration),
                             isFree: e.free_CA_mode === 0,
-                            _pf: eit.table_id === 0x4E || eit.table_id === 0x4F || undefined
+                            _pf: isPF || undefined
                         });
                     }
                 }
@@ -398,31 +413,31 @@ export default class EPG {
     }
 }
 
-function isOutOfDate(eit: any, versionDict: VersionDict): boolean {
+function isOutOfDate(eit: EIT, versionRecord: VersionRecord): boolean {
 
     if (
-        (versionDict[0x4E] !== undefined || versionDict[0x4F] !== undefined) &&
-        (eit.table_id !== 0x4E && eit.table_id !== 0x4F)
+        (versionRecord[0x4E] !== undefined && eit.table_id !== 0x4E) ||
+        (versionRecord[0x4F] !== undefined && eit.table_id !== 0x4E && eit.table_id !== 0x4F)
     ) {
         return false;
     }
 
-    return versionDict[eit.table_id] !== eit.version_number;
+    return versionRecord[eit.table_id] !== eit.version_number;
 }
 
-function isOutOfDateLv2(eit: any, versionDict: VersionDict<VersionDict>, lv2: number): boolean {
+function isOutOfDateLv2(eit: EIT, versionRecord: VersionRecord<VersionRecord>, lv2: number): boolean {
 
-    if (versionDict[eit.table_id] === undefined) {
-        versionDict[eit.table_id] = {};
-    }
     if (
-        (versionDict[0x4E] !== undefined || versionDict[0x4F] !== undefined) &&
-        (eit.table_id !== 0x4E && eit.table_id !== 0x4F)
+        (versionRecord[0x4E] !== undefined && eit.table_id !== 0x4E) ||
+        (versionRecord[0x4F] !== undefined && eit.table_id !== 0x4E && eit.table_id !== 0x4F)
     ) {
         return false;
     }
+    if (versionRecord[eit.table_id] === undefined) {
+        versionRecord[eit.table_id] = {};
+    }
 
-    return versionDict[eit.table_id][lv2] !== eit.version_number;
+    return versionRecord[eit.table_id][lv2] !== eit.version_number;
 }
 
 function getGenre(content: any): db.ProgramGenre {
