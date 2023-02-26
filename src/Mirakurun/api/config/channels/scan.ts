@@ -31,7 +31,27 @@ const channelOrder = {
     GR: 1,
     BS: 2,
     CS: 3,
-    SKY: 4
+    SKY: 4,
+    NW1: 5,
+    NW2: 6,
+    NW3: 7,
+    NW4: 8,
+    NW5: 9,
+    NW6: 10,
+    NW7: 11,
+    NW8: 12,
+    NW9: 13,
+    NW10: 14,
+    NW11: 15,
+    NW12: 16,
+    NW13: 17,
+    NW14: 18,
+    NW15: 19,
+    NW16: 20,
+    NW17: 21,
+    NW18: 22,
+    NW19: 23,
+    NW20: 24
 };
 
 enum ScanMode {
@@ -66,7 +86,7 @@ export function generateScanConfig(option: ChannelScanOption): ScanConfig {
     // delete undefined from option
     Object.keys(option).forEach(key => option[key] === undefined && delete option[key]);
 
-    if (option.type === common.ChannelTypes.GR) {
+    if (option.type !== common.ChannelTypes.BS && option.type !== common.ChannelTypes.CS && option.type !== common.ChannelTypes.SKY) {
         option = {
             startCh: 13,
             endCh: 62,
@@ -359,7 +379,7 @@ About BS Subchannel Style:
             in: "query",
             name: "type",
             type: "string",
-            enum: [common.ChannelTypes.GR, common.ChannelTypes.BS, common.ChannelTypes.CS],
+            enum: [common.ChannelTypes.GR, common.ChannelTypes.BS, common.ChannelTypes.CS, common.ChannelTypes.NW1, common.ChannelTypes.NW2, common.ChannelTypes.NW3, common.ChannelTypes.NW4, common.ChannelTypes.NW5, common.ChannelTypes.NW6, common.ChannelTypes.NW7, common.ChannelTypes.NW8, common.ChannelTypes.NW9, common.ChannelTypes.NW10, common.ChannelTypes.NW11, common.ChannelTypes.NW12, common.ChannelTypes.NW13, common.ChannelTypes.NW14, common.ChannelTypes.NW15, common.ChannelTypes.NW16, common.ChannelTypes.NW17, common.ChannelTypes.NW18, common.ChannelTypes.NW19, common.ChannelTypes.NW20],
             default: common.ChannelTypes.GR,
             description: "Specifies the channel type to scan."
         },

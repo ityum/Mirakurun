@@ -79,7 +79,7 @@ export interface Server {
 export interface Tuner {
     readonly name: string;
 
-    // GR / BS / CS / SKY
+    // GR / BS / CS / SKY / NW1 / NW2 / NW3 / NW4 / NW5 / NW6 / 省略
     readonly types: common.ChannelType[];
 
     // for chardev / dvb
@@ -102,7 +102,7 @@ export interface Tuner {
 export interface Channel {
     readonly name: string;
 
-    // GR / BS / CS / SKY
+    // GR / BS / CS / SKY / NW1 / NW2 / NW3 / NW4 / NW5 / NW6 / 省略
     readonly type: common.ChannelType;
 
     // passed to tuning command

@@ -49,7 +49,27 @@ export enum ChannelTypes {
     "GR" = "GR",
     "BS" = "BS",
     "CS" = "CS",
-    "SKY" = "SKY"
+    "SKY" = "SKY",
+    "NW1" = "NW1",
+    "NW2" = "NW2",
+    "NW3" = "NW3",
+    "NW4" = "NW4",
+    "NW5" = "NW5",
+    "NW6" = "NW6",
+    "NW7" = "NW7",
+    "NW8" = "NW8",
+    "NW9" = "NW9",
+    "NW10" = "NW10",
+    "NW11" = "NW11",
+    "NW12" = "NW12",
+    "NW13" = "NW13",
+    "NW14" = "NW14",
+    "NW15" = "NW15",
+    "NW16" = "NW16",
+    "NW17" = "NW17",
+    "NW18" = "NW18",
+    "NW19" = "NW19",
+    "NW20" = "NW20"
 }
 
 export type ChannelType = keyof typeof ChannelTypes;

@@ -102,7 +102,7 @@ if (process.platform === "linux" || process.platform === "darwin") {
 
     // winser
 
-    const dataDir = path.join(process.env.LOCALAPPDATA, "Mirakurun");
+    const dataDir = path.join(process.cwd(), "local_data");
     if (fs.existsSync(dataDir) === false) {
         fs.mkdirSync(dataDir, { recursive: true });
     }

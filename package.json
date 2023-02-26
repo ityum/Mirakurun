@@ -113,7 +113,7 @@
     "webpack-cli": "^4.9.2"
   },
   "engines": {
-    "node": "^14.17.0 || ^16"
+    "node": "^14.17.0 || ^16 || ^18"
   },
   "engineStrict": true,
   "os": [

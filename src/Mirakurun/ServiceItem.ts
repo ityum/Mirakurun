@@ -185,6 +185,66 @@ export default class ServiceItem {
             case "SKY":
                 order = "4";
                 break;
+            case "NW1":
+                order = "5";
+                break;
+            case "NW2":
+                order = "6";
+                break;
+            case "NW3":
+                order = "7";
+                break;
+            case "NW4":
+                order = "8";
+                break;
+            case "NW5":
+                order = "9";
+                break;
+            case "NW6":
+                order = "10";
+                break;
+            case "NW7":
+                order = "11";
+                break;
+            case "NW8":
+                order = "12";
+                break;
+            case "NW9":
+                order = "13";
+                break;
+            case "NW10":
+                order = "14";
+                break;
+            case "NW11":
+                order = "15";
+                break;
+            case "NW12":
+                order = "16";
+                break;
+            case "NW13":
+                order = "17";
+                break;
+            case "NW14":
+                order = "18";
+                break;
+            case "NW15":
+                order = "19";
+                break;
+            case "NW16":
+                order = "20";
+                break;
+            case "NW17":
+                order = "21";
+                break;
+            case "NW18":
+                order = "22";
+                break;
+            case "NW19":
+                order = "23";
+                break;
+            case "NW20":
+                order = "24";
+                break;
         }
 
         if (this._remoteControlKeyId) {

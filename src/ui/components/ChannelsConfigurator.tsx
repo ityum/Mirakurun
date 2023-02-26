@@ -97,7 +97,7 @@ const columns: IColumn[] = [
 
 const dummySelection = new Selection(); // dummy
 
-const typesIndex = ["GR", "BS", "CS", "SKY"];
+const typesIndex = ["GR", "BS", "CS", "SKY", "NW1", "NW2", "NW3", "NW4", "NW5", "NW6", "NW7", "NW8", "NW9", "NW10", "NW11", "NW12", "NW13", "NW14", "NW15", "NW16", "NW17", "NW18", "NW19", "NW20"];
 function sortTypes(types: ChannelType[]): ChannelType[] {
     return types.sort((a, b) => typesIndex.indexOf(a) - typesIndex.indexOf(b));
 }
@@ -165,7 +165,27 @@ const Configurator: React.FC<{ uiState: UIState, uiStateEvents: EventEmitter }> 
                         { key: "GR", text: "GR" },
                         { key: "BS", text: "BS" },
                         { key: "CS", text: "CS" },
-                        { key: "SKY", text: "SKY" }
+                        { key: "SKY", text: "SKY" },
+                        { key: "NW1", text: "NW1" },
+                        { key: "NW2", text: "NW2" },
+                        { key: "NW3", text: "NW3" },
+                        { key: "NW4", text: "NW4" },
+                        { key: "NW5", text: "NW5" },
+                        { key: "NW6", text: "NW6" },
+                        { key: "NW7", text: "NW7" },
+                        { key: "NW8", text: "NW8" },
+                        { key: "NW9", text: "NW9" },
+                        { key: "NW10", text: "NW10" },
+                        { key: "NW11", text: "NW11" },
+                        { key: "NW12", text: "NW12" },
+                        { key: "NW13", text: "NW13" },
+                        { key: "NW14", text: "NW14" },
+                        { key: "NW15", text: "NW15" },
+                        { key: "NW16", text: "NW16" },
+                        { key: "NW17", text: "NW17" },
+                        { key: "NW18", text: "NW18" },
+                        { key: "NW19", text: "NW19" },
+                        { key: "NW20", text: "NW20" }
                     ]}
                     selectedKey={ch.type}
                     onChange={(ev, option) => {
