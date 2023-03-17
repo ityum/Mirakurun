@@ -106,25 +106,37 @@ class Server {
 
         app.use((req: express.Request, res: express.Response, next) => {
 
-            if (req.ip && system.isPermittedIPAddress(req.ip) === false) {
-                req.socket.end();
-                return;
-            }
-
-            if (req.get("Origin") !== undefined) {
-                if (!system.isPermittedHost(req.get("Origin"), serverConfig.hostname)) {
-                    res.status(403).end();
+            if (serverConfig.allowListenAllInterface) {
+                if (req.ip && system.isPermittedIPAddress(req.ip) === false) {
+                    req.socket.end();
                     return;
                 }
-            }
 
-            if (req.get("Referer") !== undefined) {
-                if (!system.isPermittedHost(req.get("Referer"), serverConfig.hostname)) {
-                    res.status(403).end();
-                    return;
+                if (req.get("Origin") !== undefined) {
+                    if (
+                        !system.isPermittedHost(
+                            req.get("Origin"),
+                            serverConfig.hostname
+                        )
+                    ) {
+                        res.status(403).end();
+                        return;
+                    }
                 }
-            }
 
+                if (req.get("Referer") !== undefined) {
+                    if (
+                        !system.isPermittedHost(
+                            req.get("Referer"),
+                            serverConfig.hostname
+                        )
+                    ) {
+                        res.status(403).end();
+                        return;
+                    }
+                }
+
+            }
             res.setHeader("Server", "Mirakurun/" + pkg.version);
             next();
         });
@@ -176,38 +188,48 @@ class Server {
             next();
         });
 
-        addresses.forEach(address => {
+        if (serverConfig.allowListenAllInterface) {
+            addresses.forEach(address => {
 
-            const server = http.createServer(app);
+                const server = http.createServer(app);
 
-            server.timeout = 1000 * 15; // 15 sec.
+                server.timeout = 1000 * 15; // 15 sec.
 
-            if (regexp.unixDomainSocket.test(address) === true || regexp.windowsNamedPipe.test(address) === true) {
-                if (process.platform !== "win32" && fs.existsSync(address) === true) {
-                    fs.unlinkSync(address);
-                }
-
-                server.listen(address, () => {
-                    log.info("listening on http+unix://%s", address.replace(/\//g, "%2F"));
-                });
-
-                if (process.platform !== "win32") {
-                    fs.chmodSync(address, "777");
-                }
-            } else {
-                const [addr, iface] = address.split("%");
-                server.listen(serverConfig.port, addr, () => {
-                    if (address.includes(":") === true) {
-                        log.info("listening on http://[%s]:%d (%s)", addr, serverConfig.port, iface);
-                    } else {
-                        log.info("listening on http://%s:%d", address, serverConfig.port);
+                if (regexp.unixDomainSocket.test(address) === true || regexp.windowsNamedPipe.test(address) === true) {
+                    if (process.platform !== "win32" && fs.existsSync(address) === true) {
+                        fs.unlinkSync(address);
                     }
-                });
-            }
 
-            this._servers.add(server);
-            this._rpcs.add(createRPCServer(server));
-        });
+                    server.listen(address, () => {
+                        log.info("listening on http+unix://%s", address.replace(/\//g, "%2F"));
+                    });
+
+                    if (process.platform !== "win32") {
+                        fs.chmodSync(address, "777");
+                    }
+                } else {
+                    const [addr, iface] = address.split("%");
+                    server.listen(serverConfig.port, addr, () => {
+                        if (address.includes(":") === true) {
+                            log.info("listening on http://[%s]:%d (%s)", addr, serverConfig.port, iface);
+                        } else {
+                            log.info("listening on http://%s:%d", address, serverConfig.port);
+                        }
+                    });
+                }
+
+                this._servers.add(server);
+                this._rpcs.add(createRPCServer(server));
+            });
+        } else {
+            for (const addr of ["0.0.0.0", "::"]) {
+                const server = http.createServer(app);
+                server.timeout = 1000 * 15; // 15 sec.
+                server.listen(serverConfig.port, addr);
+                this._servers.add(server);
+                this._rpcs.add(createRPCServer(server));
+            }
+        }
 
         // event notifications for RPC
         initRPCNotifier(this._rpcs);

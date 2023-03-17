@@ -239,6 +239,7 @@ export interface ConfigServer {
     disableWebUI?: boolean;
     allowIPv4CidrRanges?: string[];
     allowIPv6CidrRanges?: string[];
+    allowListenAllInterface?: boolean;
 }
 
 export enum LogLevel {

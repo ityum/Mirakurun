@@ -189,6 +189,28 @@ const Configurator: React.FC<{ uiState: UIState, uiStateEvents: EventEmitter }> 
                         }}
                     />
 
+                    <Toggle
+                        label={
+                            <Stack horizontal verticalAlign="end">
+                                <Label>Allow Listen All Interface</Label>
+                                <TooltipHost content={
+                                    `If enabled, it allows access from all interfaces. Be careful when enabling.`
+                                }>
+                                    <Icon
+                                        iconName="Info"
+                                        style={{ marginLeft: 4, marginBottom: 6 }}
+                                    />
+                                </TooltipHost>
+                            </Stack>
+                        }
+                        checked={(editing.allowListenAllInterface === undefined || editing.allowListenAllInterface === false)}
+                        onText="Enable"
+                        offText="Disable"
+                        onChange={(ev, checked) => {
+                            setEditing({ ...editing, allowListenAllInterface: checked === false ? true : undefined })
+                        }}
+                    />
+
                     <TextField
                         styles={{ fieldGroup: { "max-width": 200 } }}
                         label="Allow IPv4 CIDR Ranges"

@@ -123,17 +123,19 @@ class NotifyManager<T> {
 
 function serverOnUpgrade(this: RPCServer["wss"], req: http.IncomingMessage, socket: net.Socket, head: Buffer): void {
 
-    if (req.socket.remoteAddress && !isPermittedIPAddress(req.socket.remoteAddress)) {
+    if (_.config.server.allowListenAllInterface) {
+        if (req.socket.remoteAddress && !isPermittedIPAddress(req.socket.remoteAddress)) {
         socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
         socket.destroy();
         return;
-    }
+        }
 
-    if (req.headers.origin !== undefined) {
-        if (!isPermittedHost(req.headers.origin, _.config.server.hostname)) {
-            socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
-            socket.destroy();
-            return;
+        if (req.headers.origin !== undefined) {
+            if (!isPermittedHost(req.headers.origin, _.config.server.hostname)) {
+                socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
+                socket.destroy();
+                return;
+            }
         }
     }
 

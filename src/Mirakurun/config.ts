@@ -42,7 +42,8 @@ const {
     DISABLE_EIT_PARSING,
     DISABLE_WEB_UI,
     ALLOW_IPV4_CIDR_RANGES,
-    ALLOW_IPV6_CIDR_RANGES
+    ALLOW_IPV6_CIDR_RANGES,
+    ALLOW_LISTEN_ALL_INTERFACE
 } = process.env;
 
 const IS_DOCKER = DOCKER === "YES";
@@ -74,6 +75,7 @@ export interface Server {
     readonly disableWebUI?: true;
     readonly allowIPv4CidrRanges?: string[];
     readonly allowIPv6CidrRanges?: string[];
+    readonly allowListenAllInterface?: true;
 }
 
 export interface Tuner {
@@ -163,7 +165,7 @@ export function loadServer(): Server {
 
     // set default
     if (!config.allowIPv4CidrRanges) {
-        config.allowIPv4CidrRanges = ["10.0.0.0/8", "127.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"];
+        config.allowIPv4CidrRanges = ["10.0.0.0/8", "127.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "100.0.0.0/8"];
     }
     if (!config.allowIPv6CidrRanges) {
         config.allowIPv6CidrRanges = ["fc00::/7", "::1/128"];
@@ -215,6 +217,9 @@ export function loadServer(): Server {
         }
         if (typeof ALLOW_IPV6_CIDR_RANGES !== "undefined" && ALLOW_IPV6_CIDR_RANGES.trim().length > 0) {
             config.allowIPv6CidrRanges = ALLOW_IPV6_CIDR_RANGES.split(",");
+        }
+        if (ALLOW_LISTEN_ALL_INTERFACE === "true") {
+            config.allowListenAllInterface = true;
         }
 
         log.info("load server config (merged w/ env): %s", JSON.stringify(config));
