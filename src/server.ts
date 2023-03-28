@@ -71,10 +71,10 @@ _.configIntegrity.channels = createHash("sha256")
 _.config.tuners = config.loadTuners();
 
 if (typeof _.config.server.logLevel === "number") {
-    (<any>log).logLevel = _.config.server.logLevel;
+    (<any> log).logLevel = _.config.server.logLevel;
 }
 if (typeof _.config.server.maxLogHistory === "number") {
-    (<any>log).maxLogHistory = _.config.server.maxLogHistory;
+    (<any> log).maxLogHistory = _.config.server.maxLogHistory;
 }
 
 _.event = new Event();
