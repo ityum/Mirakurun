@@ -20,7 +20,7 @@ import * as api from "../api";
 export const put: Operation = (req, res) => {
 
     if (process.env.pm_uptime) {
-        const cmd = spawn("mirakurun", ["restart"], {
+        const cmd = spawn("pm2", ["restart", "mirakurun-server"], {
             detached: true,
             stdio: "ignore"
         });
