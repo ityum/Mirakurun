@@ -65,7 +65,9 @@ import * as log from "./Mirakurun/log";
 
 _.config.server = config.loadServer();
 _.config.channels = config.loadChannels();
-_.configIntegrity.channels = createHash("sha256").update(JSON.stringify(_.config.channels)).digest("base64");
+_.configIntegrity.channels = createHash("sha256")
+    .update(JSON.stringify(_.config.channels))
+    .digest("base64");
 _.config.tuners = config.loadTuners();
 
 if (typeof _.config.server.logLevel === "number") {
