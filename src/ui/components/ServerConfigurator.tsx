@@ -149,7 +149,7 @@ const Configurator: React.FC<{ uiState: UIState, uiStateEvents: EventEmitter }> 
 
                     <TextField
                         styles={{ fieldGroup: { "max-width": 200 } }}
-                        label="EPG Gathering Interval"
+                        label="EPG Gathering Interval (Global)"
                         suffix="ms"
                         placeholder="1800000"
                         value={`${editing.epgGatheringInterval || ""}`}
@@ -160,6 +160,96 @@ const Configurator: React.FC<{ uiState: UIState, uiStateEvents: EventEmitter }> 
                                 const int = parseInt(newValue, 10);
                                 if (int <= 1000 * 60 * 60 * 24 * 3 && int > 0) {
                                     editing.epgGatheringInterval = int;
+                                }
+                            }
+                            setEditing({ ...editing });
+                        }}
+                    />
+                    <TextField
+                        styles={{ fieldGroup: { "max-width": 200 } }}
+                        label="EPG Gathering Interval (GR)"
+                        suffix="ms"
+                        placeholder="1800000"
+                        value={`${editing.epgGatheringIntervalGR || ""}`}
+                        onChange={(ev, newValue) => {
+                            if (newValue === "") {
+                                delete editing.epgGatheringIntervalGR;
+                            } else if (/^[0-9]+$/.test(newValue)) {
+                                const int = parseInt(newValue, 10);
+                                if (int <= 1000 * 60 * 60 * 24 * 3 && int > 0) {
+                                    editing.epgGatheringIntervalGR = int;
+                                }
+                            }
+                            setEditing({ ...editing });
+                        }}
+                    />
+                    <TextField
+                        styles={{ fieldGroup: { "max-width": 200 } }}
+                        label="EPG Gathering Interval (BS)"
+                        suffix="ms"
+                        placeholder="1800000"
+                        value={`${editing.epgGatheringIntervalBS || ""}`}
+                        onChange={(ev, newValue) => {
+                            if (newValue === "") {
+                                delete editing.epgGatheringIntervalBS;
+                            } else if (/^[0-9]+$/.test(newValue)) {
+                                const int = parseInt(newValue, 10);
+                                if (int <= 1000 * 60 * 60 * 24 * 3 && int > 0) {
+                                    editing.epgGatheringIntervalBS = int;
+                                }
+                            }
+                            setEditing({ ...editing });
+                        }}
+                    />
+                    <TextField
+                        styles={{ fieldGroup: { "max-width": 200 } }}
+                        label="EPG Gathering Interval (CS)"
+                        suffix="ms"
+                        placeholder="1800000"
+                        value={`${editing.epgGatheringIntervalCS || ""}`}
+                        onChange={(ev, newValue) => {
+                            if (newValue === "") {
+                                delete editing.epgGatheringIntervalCS;
+                            } else if (/^[0-9]+$/.test(newValue)) {
+                                const int = parseInt(newValue, 10);
+                                if (int <= 1000 * 60 * 60 * 24 * 3 && int > 0) {
+                                    editing.epgGatheringIntervalCS = int;
+                                }
+                            }
+                            setEditing({ ...editing });
+                        }}
+                    />
+                    <TextField
+                        styles={{ fieldGroup: { "max-width": 200 } }}
+                        label="EPG Gathering Interval (SKY)"
+                        suffix="ms"
+                        placeholder="1800000"
+                        value={`${editing.epgGatheringIntervalSKY || ""}`}
+                        onChange={(ev, newValue) => {
+                            if (newValue === "") {
+                                delete editing.epgGatheringIntervalSKY;
+                            } else if (/^[0-9]+$/.test(newValue)) {
+                                const int = parseInt(newValue, 10);
+                                if (int <= 1000 * 60 * 60 * 24 * 3 && int > 0) {
+                                    editing.epgGatheringIntervalSKY = int;
+                                }
+                            }
+                            setEditing({ ...editing });
+                        }}
+                    />
+                    <TextField
+                        styles={{ fieldGroup: { "max-width": 200 } }}
+                        label="EPG Gathering Interval (NW)"
+                        suffix="ms"
+                        placeholder="1800000"
+                        value={`${editing.epgGatheringIntervalNW || ""}`}
+                        onChange={(ev, newValue) => {
+                            if (newValue === "") {
+                                delete editing.epgGatheringIntervalNW;
+                            } else if (/^[0-9]+$/.test(newValue)) {
+                                const int = parseInt(newValue, 10);
+                                if (int <= 1000 * 60 * 60 * 24 * 3 && int > 0) {
+                                    editing.epgGatheringIntervalNW = int;
                                 }
                             }
                             setEditing({ ...editing });

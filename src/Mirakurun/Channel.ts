@@ -24,6 +24,11 @@ export default class Channel {
 
     private _items: ChannelItem[] = [];
     private _epgGatheringInterval: number = _.config.server.epgGatheringInterval || 1000 * 60 * 30; // 30 mins
+    private _epgGatheringIntervalGR: number = _.config.server.epgGatheringIntervalGR || this._epgGatheringInterval;
+    private _epgGatheringIntervalBS: number = _.config.server.epgGatheringIntervalBS || this._epgGatheringInterval;
+    private _epgGatheringIntervalCS: number = _.config.server.epgGatheringIntervalCS || this._epgGatheringInterval;
+    private _epgGatheringIntervalSKY: number = _.config.server.epgGatheringIntervalSKY || this._epgGatheringInterval;
+    private _epgGatheringIntervalNW: number = _.config.server.epgGatheringIntervalNW || this._epgGatheringInterval;
 
     constructor() {
 
@@ -152,6 +157,7 @@ export default class Channel {
     }
 
     private _epgGatherer(): void {
+        const nw_type_list = ["NW1", "NW2", "NW3", "NW4", "NW5", "NW6", "NW7", "NW8", "NW9", "NW10", "NW11", "NW12", "NW13", "NW14", "NW15", "NW16", "NW17", "NW18", "NW19", "NW20"];
 
         queue.add(async () => {
 
@@ -170,9 +176,28 @@ export default class Channel {
 
                     if (service.epgReady === true) {
                         const now = Date.now();
-                        if (now - service.epgUpdatedAt < this._epgGatheringInterval) {
-                            log.info("Network#%d EPG gathering has skipped by `epgGatheringInterval`", networkId);
+                        // EPG取得間隔優先順位 GR > BS > CS > SKY > NW > 全体設定
+                        if (service.channel.type === "GR" && now - service.epgUpdatedAt < this._epgGatheringIntervalGR) {
+                            log.info("Network#%d EPG gathering has skipped by `epgGatheringIntervalGR`", networkId);
                             return;
+                        }
+                        if (service.channel.type === "BS" && now - service.epgUpdatedAt < this._epgGatheringIntervalBS) {
+                            log.info("Network#%d EPG gathering has skipped by `epgGatheringIntervalBS`", networkId);
+                            return;
+                        }
+                        if (service.channel.type === "CS" && now - service.epgUpdatedAt < this._epgGatheringIntervalCS) {
+                            log.info("Network#%d EPG gathering has skipped by `epgGatheringIntervalCS`", networkId);
+                            return;
+                        }
+                        if (service.channel.type === "SKY" && now - service.epgUpdatedAt < this._epgGatheringIntervalSKY) {
+                            log.info("Network#%d EPG gathering has skipped by `epgGatheringIntervalSKY`", networkId);
+                            return;
+                        }
+                        if (nw_type_list.indexOf(service.channel.type) !== -1) {
+                            if (now - service.epgUpdatedAt < this._epgGatheringIntervalNW) {
+                                log.info("Network#%d EPG gathering has skipped by `epgGatheringIntervalNW`", networkId);
+                                return;
+                            }
                         }
                         if (now - service.epgUpdatedAt > 1000 * 60 * 60 * 6) { // 6 hours
                             log.info("Network#%d EPG gathering is resuming forcibly because reached maximum pause time", networkId);

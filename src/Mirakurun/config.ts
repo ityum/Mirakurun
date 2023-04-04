@@ -37,6 +37,11 @@ const {
     EVENT_END_TIMEOUT,
     PROGRAM_GC_INTERVAL,
     EPG_GATHERING_INTERVAL,
+    EPG_GATHERING_INTERVALGR,
+    EPG_GATHERING_INTERVALBS,
+    EPG_GATHERING_INTERVALCS,
+    EPG_GATHERING_INTERVALSKY,
+    EPG_GATHERING_INTERVALNW,
     EPG_RETRIEVAL_TIME,
     LOGO_DATA_INTERVAL,
     DISABLE_EIT_PARSING,
@@ -69,6 +74,11 @@ export interface Server {
 
     readonly programGCInterval?: number;
     readonly epgGatheringInterval?: number;
+    readonly epgGatheringIntervalGR?: number;
+    readonly epgGatheringIntervalBS?: number;
+    readonly epgGatheringIntervalCS?: number;
+    readonly epgGatheringIntervalSKY?: number;
+    readonly epgGatheringIntervalNW?: number;
     readonly epgRetrievalTime?: number;
     readonly logoDataInterval?: number;
     readonly disableEITParsing?: true;
@@ -199,6 +209,21 @@ export function loadServer(): Server {
         }
         if (typeof EPG_GATHERING_INTERVAL !== "undefined" && /^[0-9]+$/.test(EPG_GATHERING_INTERVAL)) {
             config.epgGatheringInterval = parseInt(EPG_GATHERING_INTERVAL, 10);
+        }
+        if (typeof EPG_GATHERING_INTERVAL !== "undefined" && /^[0-9]+$/.test(EPG_GATHERING_INTERVALGR)) {
+            config.epgGatheringIntervalGR = parseInt(EPG_GATHERING_INTERVALGR, 10);
+        }
+        if (typeof EPG_GATHERING_INTERVAL !== "undefined" && /^[0-9]+$/.test(EPG_GATHERING_INTERVALBS)) {
+            config.epgGatheringIntervalBS = parseInt(EPG_GATHERING_INTERVALBS, 10);
+        }
+        if (typeof EPG_GATHERING_INTERVAL !== "undefined" && /^[0-9]+$/.test(EPG_GATHERING_INTERVALCS)) {
+            config.epgGatheringIntervalCS = parseInt(EPG_GATHERING_INTERVALCS, 10);
+        }
+        if (typeof EPG_GATHERING_INTERVAL !== "undefined" && /^[0-9]+$/.test(EPG_GATHERING_INTERVALSKY)) {
+            config.epgGatheringIntervalSKY = parseInt(EPG_GATHERING_INTERVALSKY, 10);
+        }
+        if (typeof EPG_GATHERING_INTERVAL !== "undefined" && /^[0-9]+$/.test(EPG_GATHERING_INTERVALNW)) {
+            config.epgGatheringIntervalNW = parseInt(EPG_GATHERING_INTERVALNW, 10);
         }
         if (typeof EPG_RETRIEVAL_TIME !== "undefined" && /^[0-9]+$/.test(EPG_RETRIEVAL_TIME)) {
             config.epgRetrievalTime = parseInt(EPG_RETRIEVAL_TIME, 10);

@@ -233,6 +233,11 @@ export interface ConfigServer {
     eventEndTimeout?: number;
     programGCInterval?: number;
     epgGatheringInterval?: number;
+    epgGatheringIntervalGR?: number;
+    epgGatheringIntervalBS?: number;
+    epgGatheringIntervalCS?: number;
+    epgGatheringIntervalSKY?: number;
+    epgGatheringIntervalNW?: number;
     epgRetrievalTime?: number;
     logoDataInterval?: number;
     disableEITParsing?: boolean;

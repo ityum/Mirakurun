@@ -501,6 +501,16 @@ definitions:
         type: integer
       epgGatheringInterval:
         type: integer
+      epgGatheringIntervalGR:
+        type: integer
+      epgGatheringIntervalBS:
+        type: integer
+      epgGatheringIntervalCS:
+        type: integer
+      epgGatheringIntervalSKY:
+        type: integer
+      epgGatheringIntervalNW:
+        type: integer
       epgRetrievalTime:
         type: integer
       logoDataInterval:
