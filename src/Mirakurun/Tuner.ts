@@ -287,7 +287,7 @@ export default class Tuner {
             const devices = this._getDevicesByType(setting.channel.type);
 
             let tryCount = 25;
-            let wait_tuner_ms = 1000; // ms default(1s)
+            const wait_tuner_ms = 1000; // ms default(1s)
             const length = devices.length;
 
             function find() {
