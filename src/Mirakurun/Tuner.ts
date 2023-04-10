@@ -286,7 +286,7 @@ export default class Tuner {
 
             const devices = this._getDevicesByType(setting.channel.type);
 
-            let tryCount = 5;
+            let tryCount = 25;
             let wait_tuner_ms = 1000; // ms default(1s)
             const length = devices.length;
 
@@ -362,7 +362,6 @@ export default class Tuner {
                     --tryCount;
                     if (tryCount > 0) {
                         setTimeout(find, wait_tuner_ms);
-                        wait_tuner_ms += 1000; // チューナーオープンに失敗するたびに再オープンまで+1秒する
                     } else {
                         reject(new Error("no available tuners"));
                     }
