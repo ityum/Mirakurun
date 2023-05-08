@@ -49,7 +49,7 @@ if (process.platform === "linux" || process.platform === "darwin") {
     const testFlight = child_process.execSync("pm2 -v", { encoding: "utf8" });
     console.log(testFlight);
 
-    const logDir = path.join("/usr/local/var/log");
+    const logDir = path.join("./local_data/log");
     child_process.execSync(`mkdir -vp ${logDir}`);
 
     // pm2 check
@@ -121,7 +121,7 @@ if (process.platform === "linux" || process.platform === "darwin") {
             "--env", `USERPROFILE=${ process.env.USERPROFILE }`,
             "--env", `LOCALAPPDATA=${ process.env.LOCALAPPDATA }`,
             "--env", "USING_WINSER=1",
-            "--name", "mirakurun"
+            "--name", process.argv[2]
         ],
         {
             stdio: [
