@@ -51,7 +51,7 @@
     "prepublishOnly": "npm run clean && npm run build",
     "preinstall": "node bin/preinstall.js",
     "postinstall": "node bin/postinstall.js mirakurun",
-    "preuninstall": "node bin/preuninstall.js",
+    "preuninstall": "node bin/preuninstall.js mirakurun",
     "docker:build": "docker-compose -f docker/docker-compose.yml build",
     "docker:run": "docker-compose -f docker/docker-compose.yml run --rm --service-ports mirakurun",
     "docker:up": "docker-compose -f docker/docker-compose.yml up -d",

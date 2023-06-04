@@ -42,7 +42,7 @@ if (process.platform === "linux" || process.platform === "darwin") {
         ]
     });
 } else if (process.platform === "win32") {
-    execSync("winser -r -x -n mirakurun", {
+    execSync(`winser -r -x -n ${ process.argv[2] }`, {
         stdio: [
             null,
             process.stdout,
