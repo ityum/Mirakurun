@@ -1,12 +1,12 @@
+# logLevel: <number>
 logLevel: 2
-path: \\.\pipe\mirakurun_
-port: 40774
-allowIPv4CidrRanges:
-  - 10.0.0.0/8
-  - 127.0.0.0/8
-  - 172.16.0.0/12
-  - 192.168.0.0/16
-allowIPv6CidrRanges:
-  - fc00::/7
-  - '::1/128'
-hostname: DESKTOP-O28AA3M
+
+# path: <string>
+path: \\.\pipe\mirakurun
+
+# port: <number>
+# You can change this if port conflicted.
+# Don't expose this port on the internet, not even with NAPT.
+# Use this in LAN or VPN.
+# `~` to disable TCP port listening.
+port: 40772
