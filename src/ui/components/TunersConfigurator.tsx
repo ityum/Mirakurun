@@ -90,7 +90,10 @@ const columns: IColumn[] = [
 
 const dummySelection = new Selection(); // dummy
 
-const typesIndex = ["GR", "BS", "CS", "SKY", "NW1", "NW2", "NW3", "NW4", "NW5", "NW6", "NW7", "NW8", "NW9", "NW10", "NW11", "NW12", "NW13", "NW14", "NW15", "NW16", "NW17", "NW18", "NW19", "NW20"];
+const typesIndex = ["GR", "BS", "CS", "SKY", "NW1", "NW2", "NW3", "NW4", "NW5", "NW6", "NW7", "NW8", "NW9", "NW10",
+                    "NW11", "NW12", "NW13", "NW14", "NW15", "NW16", "NW17", "NW18", "NW19", "NW20",
+                    "NW21", "NW22", "NW23", "NW24", "NW25", "NW26", "NW27", "NW28", "NW29", "NW30",
+                    "NW31", "NW32", "NW33", "NW34", "NW35", "NW36", "NW37", "NW38", "NW39", "NW40"];
 function sortTypes(types: ChannelType[]): ChannelType[] {
     return types.sort((a, b) => typesIndex.indexOf(a) - typesIndex.indexOf(b));
 }
@@ -174,7 +177,27 @@ const Configurator: React.FC<{ uiState: UIState, uiStateEvents: EventEmitter }> 
                         { key: "NW17", text: "NW17" },
                         { key: "NW18", text: "NW18" },
                         { key: "NW19", text: "NW19" },
-                        { key: "NW20", text: "NW20" }
+                        { key: "NW20", text: "NW20" },
+                        { key: "NW21", text: "NW21" },
+                        { key: "NW22", text: "NW22" },
+                        { key: "NW23", text: "NW23" },
+                        { key: "NW24", text: "NW24" },
+                        { key: "NW25", text: "NW25" },
+                        { key: "NW26", text: "NW26" },
+                        { key: "NW27", text: "NW27" },
+                        { key: "NW28", text: "NW28" },
+                        { key: "NW29", text: "NW29" },
+                        { key: "NW30", text: "NW30" },
+                        { key: "NW31", text: "NW31" },
+                        { key: "NW32", text: "NW32" },
+                        { key: "NW33", text: "NW33" },
+                        { key: "NW34", text: "NW34" },
+                        { key: "NW35", text: "NW35" },
+                        { key: "NW36", text: "NW36" },
+                        { key: "NW37", text: "NW37" },
+                        { key: "NW38", text: "NW38" },
+                        { key: "NW39", text: "NW39" },
+                        { key: "NW40", text: "NW40" }
                     ]}
                     selectedKeys={tuner.types}
                     onChange={(ev, option) => {

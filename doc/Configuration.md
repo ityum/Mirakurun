@@ -68,7 +68,7 @@ sudo mirakurun config tuners
     - CS
     - SKY
     - NW1
-    - NW20
+    - NW40
   # for chardev/dvb
   command: cmd <channel> --arg1 --arg2 ... # string
   # for dvb
@@ -110,7 +110,7 @@ sudo mirakurun config channels
 ```yaml
 # array
 - name: CHANNEL-NAME-FOR-IDENTIFICATION # string
-  type: GR # enum [GR|BS|CS|SKY|NW1|NW2|NW3|NW4|NW5|NW6|NW7|NW8|NW9|NW10|NW11|NW12|NW13|NW14|NW15|NW16|NW17|NW18|NW19|NW20]
+  type: GR # enum [GR|BS|CS|SKY|NW1|NW2|NW3|NW4|NW5|NW6|NW7|NW8|NW9|NW10|NW11|NW12|NW13|NW14|NW15|NW16|NW17|NW18|NW19|NW20|~|NW40]
   channel: '0' # string
   # below are optional
   serviceId: 1234 # integer

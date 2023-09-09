@@ -69,7 +69,28 @@ export enum ChannelTypes {
     "NW17" = "NW17",
     "NW18" = "NW18",
     "NW19" = "NW19",
-    "NW20" = "NW20"
+    "NW20" = "NW20",
+    "NW21" = "NW21",
+    "NW22" = "NW22",
+    "NW23" = "NW23",
+    "NW24" = "NW24",
+    "NW25" = "NW25",
+    "NW26" = "NW26",
+    "NW27" = "NW27",
+    "NW28" = "NW28",
+    "NW29" = "NW29",
+    "NW30" = "NW30",
+    "NW31" = "NW31",
+    "NW32" = "NW32",
+    "NW33" = "NW33",
+    "NW34" = "NW34",
+    "NW35" = "NW35",
+    "NW36" = "NW36",
+    "NW37" = "NW37",
+    "NW38" = "NW38",
+    "NW39" = "NW39",
+    "NW40" = "NW40"
+
 }
 
 export type ChannelType = keyof typeof ChannelTypes;
